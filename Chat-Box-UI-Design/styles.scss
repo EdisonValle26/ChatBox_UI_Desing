@@ -1,0 +1,162 @@
+/* Google fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+$primary-color: #11998e;
+$secondary-color: #38ef7d;
+$chat-padding-x: 20px;
+$chat-padding-y: 15px;
+$chat-popup-width: 370px;
+$chat-popup-height: 560px;
+$defaul-font-size: 14px;
+
+body {
+    font: $defaul-font-size 'Montserrat', 'sans-serif';
+    background: linear-gradient(to right, $primary-color, $secondary-color);
+}
+
+.chat-button {
+    border: none;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    svg {
+        height: 30px;
+        width: 30px;
+        position: none;
+    }
+}
+
+.chat-wrapper {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.chat {
+    width: $chat-popup-width;
+    height: $chat-popup-height;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+    background-color: white;
+    overflow: hidden;
+    transform: scale(0) rotateZ(45deg);
+    transform-origin: left bottom;
+    box-shadow: 0 10px 40px -20px black;
+    opacity: 0;
+    transition: all .2s ease-in;
+
+    &.open{
+        transform: scale(1) rotateZ(0);
+        opacity: 1;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $chat-padding-y $chat-padding-x;
+        background: linear-gradient(to right, darken($primary-color, 40%), darken($secondary-color, 40%));
+        color: white;
+        font-size: $defaul-font-size + 2;
+
+        a {
+            color: rgba(white, .5);
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+
+    &__body{
+        padding: $chat-padding-y $chat-padding-x;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        gap: 2rem;
+        flex: 1;
+
+        .chat-message-item {
+            border-radius: 15px 15px 15px 0;
+            padding: 10px 15px;
+            background: linear-gradient(to right, darken($primary-color, 40%), darken($secondary-color, 40%));
+            color: white;
+            align-self: flex-start;
+            position: relative;
+
+            time {
+                position: absolute;
+                opacity: .4;
+                inset: 0;
+                margin-top: -25px;
+                font-weight: bold;
+                font-size: $defaul-font-size - 2;
+                text-align: left;
+                padding-left: 5px;
+                color: black;
+            }
+
+            &.out {
+                background: linear-gradient(to left, darken($primary-color, 40%), darken($secondary-color, 40%));
+                align-self: flex-end;
+                border-radius: 15px 15px 0 15px;
+                max-width: 80%;
+
+                time {
+                    padding-right: 5px;
+                    text-align: right;
+
+                }
+            }
+        }
+    }
+
+    &__footer {
+        background-color: #f4f4f4;
+        border-top: 1px solid #dddddd;
+        display: flex;
+        align-items: center;
+        padding-right: $chat-padding-x;
+        padding-left: $chat-padding-x;
+        
+        a {
+            display: block;
+            padding: 10px;
+            margin-right: -10px;
+            color: #555;
+
+            &:hover {
+                color: black;
+
+            }
+        }
+
+        input {
+            flex: 1;
+            padding: $chat-padding-y 0;
+            border: none;
+            width: 100%;
+            background: none;
+            font-size: $defaul-font-size;
+            color: black;
+
+            &::placeholder {
+                color: #555555;
+            }
+
+            &:focus {
+                outline: black;
+            }
+        }
+    }
+}
